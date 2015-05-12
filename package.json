@@ -30,9 +30,14 @@
     "gulp-sass": "^2.0.0",
     "gulp-sourcemaps": "^1.5.2",
     "handlebars": "^3.0.3",
-    "hektor-utils": "git://github.com/infinumjs/hektor-utils",
     "hbsfy": "^2.2.1",
     "lodash": "^3.8.0",
     "run-sequence": "^1.1.0"
+  },
+  "devDependencies": {
+    "hektor-utils": "infinumjs/hektor-utils"
+  },
+  "peerDependencies": {
+    "gulp": "^3.8.11"
   }
 }
