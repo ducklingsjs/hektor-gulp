@@ -6,8 +6,8 @@ module.exports = function(gulp, paths) {
   // Load the HEKTOR gulp dependencies
   var H = {
     deps: require('gulp-load-plugins')({
-    // We need to set the package.json path manually or it will take the project package, and we don't want that
-    config: path.normalize(__dirname + '/../../package.json')
+      // We need to set the package.json path manually or it will take the project package, and we don't want that
+      config: path.normalize(__dirname + '/package.json')
     }),
     tasks: {},
     run: require('run-sequence').use(gulp),
