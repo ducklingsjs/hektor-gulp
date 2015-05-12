@@ -29,7 +29,7 @@ module.exports = function(gulp, H, options) {
           {
             tr: hbsfy,
             options: {
-              compiler: 'require("hektor/node_modules/hbsfy/runtime")'
+              compiler: 'require("hektor-gulp/node_modules/hbsfy/runtime")'
             }
           }
         ],
