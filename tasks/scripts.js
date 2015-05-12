@@ -11,7 +11,7 @@ module.exports = function(gulp, H, options) {
     nodePath = paths.concat(nodePath);
   }
 
-  gulp.task('browserify', function() {
+  gulp.task('scripts', function() {
     return gulp.src(options.src || H.paths.app + '/scripts/main.js')
       .pipe(H.deps.plumber({
         errorHandler: H.deps.notify.onError('Browserify: <%= error.message %>')

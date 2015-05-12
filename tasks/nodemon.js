@@ -3,7 +3,7 @@ module.exports = function(gulp, H, options) {
 
   gulp.task('nodemon', function(callback) {
     try {
-      H.deps.nodemon(options || {
+      H.deps.nodemon(options.config || {
         script: 'index.js',
         ext: 'js',
         ignore: [

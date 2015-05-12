@@ -6,10 +6,10 @@ var gulp = require('gulp');
 // * run - https://www.npmjs.com/package/run-sequence
 // * paths - app, dist (used in task options)
 var H = require('hektor-gulp')(gulp, { app: 'app', dist: 'dist'}).load({
-  sass: {
+  styles: {
     browsers: ['chrome 40', 'ios 7']
   },
-  browserify: {
+  scripts: {
     aliasify: {
       aliases: {
         underscore: 'lodash'
@@ -20,6 +20,6 @@ var H = require('hektor-gulp')(gulp, { app: 'app', dist: 'dist'}).load({
 });
 
 // Load receives a task name, array of task names or object with taskName: taskOptions
-// var H = require('hektor-gulp')(gulp).load('sass');
+// var H = require('hektor-gulp')(gulp).load('styles');
 
-gulp.task('scss', ['sass'], function() {}); // Alias for sass, could also contain other tasks
+gulp.task('scss', ['styles'], function() {}); // Alias for styles, could also contain other tasks

@@ -4,8 +4,8 @@ module.exports = function(gulp, H, options) {
   options = options || false;
 
   var defaultWatch = {};
-  defaultWatch[H.paths.app + '/styles/{,**/}*.scss'] = ['sass'];
-  defaultWatch[H.paths.app + '/scripts/{,**/}*.{js,hbs}'] = ['browserify'];
+  defaultWatch[H.paths.app + '/styles/{,**/}*.scss'] = ['styles'];
+  defaultWatch[H.paths.app + '/scripts/{,**/}*.{js,hbs}'] = ['scripts'];
 
   var watch = options.watch || defaultWatch;
 
