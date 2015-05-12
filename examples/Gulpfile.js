@@ -20,6 +20,6 @@ var H = require('hektor-gulp')(gulp, { app: 'app', dist: 'dist'}).load({
 });
 
 // Load receives a task name, array of task names or object with taskName: taskOptions
-// var H = require('hektor/gulp')(gulp).load('sass');
+// var H = require('hektor-gulp')(gulp).load('sass');
 
 gulp.task('scss', ['sass'], function() {}); // Alias for sass, could also contain other tasks

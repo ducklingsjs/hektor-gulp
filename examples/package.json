@@ -7,6 +7,6 @@
   "license": "ISC",
   "devDependencies": {
     "gulp": "^3.8.11",
-    "hektor": "git://github.com/infinumjs/hektor-gulp",
+    "hektor-gulp": "git://github.com/infinumjs/hektor-gulp",
   }
 }
