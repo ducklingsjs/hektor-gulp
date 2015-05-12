@@ -7,7 +7,7 @@ module.exports = function(gulp, paths) {
   var H = {
     deps: require('gulp-load-plugins')({
     // We need to set the package.json path manually or it will take the project package, and we don't want that
-    config: path.normalize(__dirname + '../package.json')
+    config: path.normalize(__dirname + '/../../package.json')
     }),
     tasks: {},
     run: require('run-sequence').use(gulp),
