@@ -3,6 +3,9 @@ module.exports = function(gulp, H, options) {
   // Create a standard gulp task
   return gulp.task(options.taskName, function() {
 
+    // Dependencies are lazy loaded - load them only when a task that requires them runs
+    H.loadDeps(['plumber', 'notify', 'sourcemaps', 'sass', 'autoprefixer', 'connect']);
+
     // By default, tasks run with maximum concurrency (https://github.com/gulpjs/gulp/blob/master/docs/API.md#async-task-support)
     // That's why a task should _ALWAYS_ do one of the following:
     // * return a stream

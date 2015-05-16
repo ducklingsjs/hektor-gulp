@@ -8,6 +8,7 @@ module.exports = function(gulp, H, options) {
   H.load(options.server);
 
   gulp.task(options.taskName, function() {
+
     H.run(deps, options.server, function() {
       _.each(options.watch, function(watcher) {
         gulp.watch(watcher.path, watcher.tasks);

@@ -1,6 +1,8 @@
 module.exports = function(gulp, H, options) {
 
   gulp.task(options.taskName, function() {
+    H.loadDeps(['plumber', 'notify', 'connect']);
+
     var stream = gulp.src(options.src)
       .pipe(H.deps.plumber({
         errorHandler: H.deps.notify.onError('Scripts: <%= error.message %>')
@@ -29,6 +31,7 @@ module.exports = function(gulp, H, options) {
         });
       }
 
+      H.loadDeps('browserify2');
       stream = stream.pipe(H.deps.browserify2({
         fileName: options.filename,
         transform: transforms,
