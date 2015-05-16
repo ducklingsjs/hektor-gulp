@@ -12,7 +12,7 @@ module.exports = function(gulp, H, options) {
         var babelify = require('babelify');
         transforms.push(babelify.configure(options.transpilerOptions));
       }
-      if (Object.keys(options.aliases).length) {
+      if (Object.keys(options.moduleSystemConfig.aliases).length) {
         var aliasify = require('aliasify');
         transforms.push({
           tr: aliasify,
@@ -29,7 +29,7 @@ module.exports = function(gulp, H, options) {
         });
       }
 
-      stream.pipe(H.deps.browserify2({
+      stream = stream.pipe(H.deps.browserify2({
         fileName: options.filename,
         transform: transforms,
         options: {
@@ -39,8 +39,7 @@ module.exports = function(gulp, H, options) {
       }))
     }
 
-    stream.pipe(gulp.dest(options.dest))
+    return stream.pipe(gulp.dest(options.dest))
       .pipe(H.deps.connect.reload());
-    return stream;
   });
 };
