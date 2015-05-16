@@ -1,6 +1,6 @@
 module.exports = {
   server: 'connect',
-  watch: {
+  watch: [
     {
       path: '<%= paths.app %>/styles/{,**/}*.scss',
       tasks: ['styles']
@@ -8,5 +8,5 @@ module.exports = {
       path: '<%= paths.app %>/scripts/{,**/}*.{js,hbs}',
       tasks: ['scripts']
     }
-  }
+  ]
 };

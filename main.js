@@ -28,7 +28,7 @@ module.exports = function(gulp, paths) {
       modules = [].concat(modules);
     }
     if (modules instanceof Array) {
-      modules = _.zipObject(modules);
+      modules = _.zipObject(modules, _.map(Array(modules.length), function() { return {}; }));
     }
 
     _.each(modules, function(opts, name) {
@@ -45,7 +45,7 @@ module.exports = function(gulp, paths) {
       }
 
       // Load the default options and merge them with the received ones
-      var defaults = require('./config/' + opts.moduleName);
+      var defaults = require('./config/' + options.moduleName);
       options = moduleOptions(defaults, options, H.config);
       H.config[module] = options;
     });
@@ -57,7 +57,7 @@ module.exports = function(gulp, paths) {
       }
 
       // sass task is also documented
-      H.tasks[module] = require('./tasks/' + opts.moduleName)(gulp, H, H.config[module]);
+      H.tasks[module] = require('./tasks/' + options.moduleName)(gulp, H, H.config[module]);
     });
 
     return H;

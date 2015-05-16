@@ -10,8 +10,10 @@ var H = require('hektor-gulp')(gulp, { app: 'app', dist: 'dist'}).load({
     browsers: ['chrome 40', 'ios 7']
   },
   scripts: {
-    aliases: {
-      underscore: 'lodash'
+    moduleSystemConfig: {
+      aliases: {
+        underscore: 'lodash'
+      }
     }
   },
   serve: {}
