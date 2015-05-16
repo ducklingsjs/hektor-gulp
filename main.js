@@ -10,7 +10,7 @@ module.exports = function(gulp, paths) {
     }
   };
 
-  var loader = require('./utils/module-loader')(H);
+  var loader = require('./utils/module-loader')(gulp, H);
 
   H.loadDeps = loader.deps;
   H.load = loader.tasks;
