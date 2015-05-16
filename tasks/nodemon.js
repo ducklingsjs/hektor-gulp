@@ -1,17 +1,12 @@
 module.exports = function(gulp, H, options) {
-  options = options || false;
-
   gulp.task(options.taskName, function(callback) {
     try {
-      H.deps.nodemon(options.config || {
-        script: 'index.js',
-        ext: 'js',
-        ignore: [
-          '.tmp/**',
-          H.paths.app + '/*',
-          H.paths.dist + '/*',
-          'node_modules/*'
-        ]
+      H.deps.nodemon({
+        script: options.script,
+        ext: options.ext,
+        ignore: options.ignore,
+        tasks: options.tasks,
+        env: options.env
       });
       callback();
     } catch(e) {
