@@ -1,44 +1,46 @@
-var babelify = require('babelify');
-var aliasify = require('aliasify');
-var hbsfy = require('hbsfy');
-
 module.exports = function(gulp, H, options) {
-  options = options || false;
-
-  var nodePath = ['./' + H.paths.app + '/scripts'];
-  if (process.env.NODE_PATH) {
-    var paths = process.env.NODE_PATH.split(':');
-    nodePath = paths.concat(nodePath);
-  }
 
   gulp.task('scripts', function() {
-    return gulp.src(options.src || H.paths.app + '/scripts/main.js')
+    var stream = gulp.src(options.src)
       .pipe(H.deps.plumber({
-        errorHandler: H.deps.notify.onError('Browserify: <%= error.message %>')
-      }))
-      .pipe(H.deps.browserify2({
-        fileName: options.main || 'main.js',
-        transform: [
-          babelify.configure(options.babelify || {
-            stage: 2
-          }),
-          {
-            tr: aliasify,
-            options: options.aliasify || {}
-          },
-          {
-            tr: hbsfy,
-            options: {
-              compiler: 'require("hektor-gulp/node_modules/hbsfy/runtime")'
-            }
+        errorHandler: H.deps.notify.onError('Scripts: <%= error.message %>')
+      }));
+
+    if (options.moduleSystem === 'browserify') {
+      var transforms = [];
+      if (options.transpiler === 'babel') {
+        var babelify = require('babelify');
+        transforms.push(babelify.configure(options.transpilerOptions));
+      }
+      if (Object.keys(options.aliases).length) {
+        var aliasify = require('aliasify');
+        transforms.push({
+          tr: aliasify,
+          options: { aliases: options.moduleSystemConfig.aliases }
+        });
+      }
+      if (options.templates === 'handlebars') {
+        var hbsfy = require('hbsfy');
+        transforms.push({
+          tr: hbsfy,
+          options: {
+            compiler: 'require("hektor-gulp/node_modules/hbsfy/runtime")'
           }
-        ],
+        });
+      }
+
+      stream.pipe(H.deps.browserify2({
+        fileName: options.filename,
+        transform: transforms,
         options: {
-          paths: options.nodePath || nodePath,
+          paths: options.moduleSystemConfig.nodePath,
           debug: !!options.debug
         }
       }))
-      .pipe(gulp.dest(options.dest || '.tmp/scripts'))
+    }
+
+    stream.pipe(gulp.dest(options.dest))
       .pipe(H.deps.connect.reload());
+    return stream;
   });
 };

@@ -1,22 +1,16 @@
 var _ = require('lodash');
 
 module.exports = function(gulp, H, options) {
-  options = options || false;
-
-  var defaultWatch = {};
-  defaultWatch[H.paths.app + '/styles/{,**/}*.scss'] = ['styles'];
-  defaultWatch[H.paths.app + '/scripts/{,**/}*.{js,hbs}'] = ['scripts'];
-
-  var watch = options.watch || defaultWatch;
-
   // Get all tasks that are called, and run them before the server is started
   // Is it safe to do compact here?
-  var deps = _(watch).values().flatten().compact().value();
+  var deps = _(options.watch).pluck('tasks').flatten().compact().value();
+
+  H.load(options.server);
 
   gulp.task('serve', function() {
-    H.run(deps, options.server || 'connect', function() {
-      _.each(watch, function(tasks, path) {
-        gulp.watch(path, tasks);
+    H.run(deps, options.server, function() {
+      _.each(options.watch, function(watcher) {
+        gulp.watch(watcher.path, watcher.tasks);
       });
     });
   });

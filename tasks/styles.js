@@ -1,8 +1,5 @@
 module.exports = function(gulp, H, options) {
 
-  // Options should always be optional
-  options = options || false;
-
   // Create a standard gulp task
   return gulp.task('styles', function() {
 
@@ -12,20 +9,20 @@ module.exports = function(gulp, H, options) {
     // * return a promise
     // * call the callback function (the only argument in the task function)
     //   callback should get (null|undefined) as only argument if all OK, or an error object
-    return gulp.src(options.src || H.paths.app + '/styles/main.scss')
+    return gulp.src(options.src)
       .pipe(H.deps.plumber({
-        errorHandler: H.deps.notify.onError('Sass: <%= error.message %>')
+        errorHandler: H.deps.notify.onError('Styles: <%= error.message %>')
       }))
       .pipe(H.deps.sourcemaps.init())
       .pipe(H.deps.sass({
-        includePaths: options.includePaths || H.paths.app + '/bower_components'
+        includePaths: options.includePaths
       }))
       .pipe(H.deps.autoprefixer({
-          browsers: options.browsers || ['last 2 versions', 'ie 10'],
+          browsers: options.browsers,
           cascade: false
       }))
       .pipe(H.deps.sourcemaps.write())
-      .pipe(gulp.dest(options.dest || '.tmp/styles'))
+      .pipe(gulp.dest(options.dest))
       .pipe(H.deps.connect.reload());
   });
 };

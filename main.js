@@ -1,5 +1,6 @@
 var path = require('path');
 var _ = require('lodash');
+var moduleOptions = require('./utils/module-options');
 
 module.exports = function(gulp, paths) {
 
@@ -11,10 +12,13 @@ module.exports = function(gulp, paths) {
     }),
     tasks: {},
     run: require('run-sequence').use(gulp),
-    paths: paths || {
-      app: 'app',
-      dist: 'dist'
-    }
+    config: {
+      paths: paths || {
+        app: 'app',
+        dist: 'dist'
+      }
+    },
+    load: loadModules
   };
 
   function loadModules(modules) {
@@ -27,14 +31,33 @@ module.exports = function(gulp, paths) {
       modules = _.zipObject(modules);
     }
 
+    // Prepare all configs before tasks start to load
+    // in order to have configs ready for internal dependencies
     _.each(modules, function(options, module) {
+      if (H.config[module]) {
+        // Already loaded
+        return;
+      }
+
+      // Load the default options and merge them with the received ones
+      var defaults = require('./config/' + module);
+      options = moduleOptions(defaults, options, H.config);
+      H.config[module] = options;
+    });
+
+    _.each(modules, function(options, module) {
+      if (H.tasks[module]) {
+        // Already loaded
+        return;
+      }
 
       // sass task is also documented
-      H.tasks[module] = require('./tasks/' + module)(gulp, H, options);
+      H.tasks[module] = require('./tasks/' + module)(gulp, H, H.config[module]);
     });
+
     return H;
   }
-  
+
   return {
     loadAll: function() {
       console.error('Not implemented yet!');
