@@ -1,6 +1,6 @@
 module.exports = function(gulp, H, options) {
 
-  gulp.task('scripts', function() {
+  gulp.task(options.taskName, function() {
     var stream = gulp.src(options.src)
       .pipe(H.deps.plumber({
         errorHandler: H.deps.notify.onError('Scripts: <%= error.message %>')

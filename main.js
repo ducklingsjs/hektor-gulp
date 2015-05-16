@@ -31,6 +31,11 @@ module.exports = function(gulp, paths) {
       modules = _.zipObject(modules);
     }
 
+    _.each(modules, function(opts, name) {
+      opts.taskName = name;
+      opts.moduleName = opts.moduleName || name;
+    });
+
     // Prepare all configs before tasks start to load
     // in order to have configs ready for internal dependencies
     _.each(modules, function(options, module) {
@@ -40,7 +45,7 @@ module.exports = function(gulp, paths) {
       }
 
       // Load the default options and merge them with the received ones
-      var defaults = require('./config/' + module);
+      var defaults = require('./config/' + opts.moduleName);
       options = moduleOptions(defaults, options, H.config);
       H.config[module] = options;
     });
@@ -52,7 +57,7 @@ module.exports = function(gulp, paths) {
       }
 
       // sass task is also documented
-      H.tasks[module] = require('./tasks/' + module)(gulp, H, H.config[module]);
+      H.tasks[module] = require('./tasks/' + opts.moduleName)(gulp, H, H.config[module]);
     });
 
     return H;

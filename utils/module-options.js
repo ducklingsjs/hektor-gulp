@@ -2,7 +2,7 @@ var _ = require('lodash');
 
 module.exports = function(defaults, options, templateOpts) {
   var opts = _.extend({}, defaults, options || {});
-  
+
   function prepareTemplates(opts) {
     if (opts instanceof Array) {
       return opts.map(prepareTemplates);
