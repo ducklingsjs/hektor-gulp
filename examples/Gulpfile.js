@@ -16,7 +16,7 @@ var H = require('hektor-gulp')(gulp, { app: 'app', dist: 'dist'}).load({
     }
   },
   serve: {}
-});
+}, true); // 2nd argument is "lazy" - should tasks be loaded only when they're needed (experimental)
 
 // Load receives a task name, array of task names or object with taskName: taskOptions
 // var H = require('hektor-gulp')(gulp).load('styles');

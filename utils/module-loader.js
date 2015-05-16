@@ -39,31 +39,40 @@ module.exports = function(gulp, H) {
     });
   }
 
+  function loadTask(taskName) {
+    if (H.tasks[taskName]) return; // Already set
+
+    // styles task is also documented
+    var config = H.config[taskName];
+    H.tasks[taskName] = require('../tasks/' + config.moduleName)(gulp, H, config);
+  }
+
   return {
     deps: function(deps) {
       deps = [].concat(deps);
       deps.forEach(function(name) {
-        if (H.deps[name]) {
-          // Already loaded
-          return;
-        }
+        if (H.deps[name]) return; // Already loaded
 
         H.deps[name] = require('gulp-' + name);
       });
     },
 
-    tasks: function(modules) {
+    tasks: function(modules, lazy) {
       modules = normalizeConfigs(modules);
       prepareConfigs(modules);
-      _.each(modules, function(options, module) {
-        if (H.tasks[module]) {
-          // Already loaded
-          return;
-        }
 
-        // styles task is also documented
-        H.tasks[module] = require('../tasks/' + H.config[module].moduleName)(gulp, H, H.config[module]);
-      });
+      if (lazy) {
+        // gulp uses minimist for this, but I think it would be an overkill here (and perf overhead)
+        var invokedTasks = process.argv.slice(2);
+
+        _.each(invokedTasks, function(invokedTask) {
+          if (modules[invokedTask]) {
+            loadTask(invokedTask);
+          }
+        });
+      } else {
+        _.each(_.keys(modules), loadTask);
+      }
       return H;
     }
   };
