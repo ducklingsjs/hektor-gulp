@@ -4,6 +4,8 @@ Helpfull Esoteric Kind Tool Or Resource
 
 Project scaffolding &amp; dev dependency manager tool
 
+To install, run: ``npm install git@github.com:infinumjs/hektor-gulp.git --save-dev``
+
 # Trying it out
 
 Go to examples folder and see how to use hektor-gulp
