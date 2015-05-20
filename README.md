@@ -1,6 +1,6 @@
 # hektor-gulp
 
-Helpfull Esoteric Kind Tool Or Resource
+Helpful Esoteric Kind Tool Or Resource
 
 Project scaffolding &amp; dev dependency manager tool
 
