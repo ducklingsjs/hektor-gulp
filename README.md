@@ -30,8 +30,6 @@ Documented in [hektor-docs](https://github.com/infinumjs/hektor-docs)
   * cssmin
   * htmlmin
   * uglify
-* scripts
-  * debowerify?
 * deploy
   * zip
   * ssh

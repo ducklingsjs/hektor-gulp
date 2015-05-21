@@ -21,6 +21,10 @@ module.exports = function(gulp, H, options) {
           options: { aliases: options.moduleSystemConfig.aliases }
         });
       }
+      if (options.bower) {
+        var debowerify = require('debowerify');
+        transforms.push(debowerify);
+      }
       if (options.templates === 'handlebars') {
         var hbsfy = require('hbsfy');
         transforms.push({
