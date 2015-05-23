@@ -31,6 +31,7 @@
     "gulp-sass": "^2.0.0",
     "gulp-scss-lint": "^0.2.0",
     "gulp-sourcemaps": "^1.5.2",
+    "gulp-util": "^3.0.4",
     "handlebars": "^3.0.3",
     "hbsfy": "^2.2.1",
     "jshint-stylish": "^1.0.2",

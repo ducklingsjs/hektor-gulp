@@ -1,3 +1,4 @@
+var gutil = require('gulp-util');
 var moduleOptions = require('./module-options');
 var _ = require('lodash');
 
@@ -68,6 +69,17 @@ module.exports = function(gulp, H) {
         _.each(invokedTasks, function(invokedTask) {
           if (modules[invokedTask]) {
             loadTask(invokedTask);
+          } else {
+            try {
+              var opts = {};
+              opts[invokedTask] = {};
+              prepareConfigs(opts);
+              // modules[invokedTask] = {};
+              loadTask(invokedTask);
+              gutil.log('Autoloading task "' + invokedTask + '"');
+            } catch(e) {
+              gutil.log('Autoloading task "' + invokedTask + '" failed:', e);
+            }
           }
         });
       } else {
