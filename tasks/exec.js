@@ -8,6 +8,12 @@ module.exports = function(gulp, H, options) {
     }
     exec(cmd, function(err, stdout, stderr) {
       done(err);
+      if (options.stdout) {
+        console.log(stdout);
+      }
+      if (options.stderr) {
+        console.error(stderr);
+      }
     });
   });
 };

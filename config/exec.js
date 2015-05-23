@@ -1,3 +1,5 @@
 module.exports = {
-  command: 'uptime'
+  command: 'uptime',
+  stdout: true,
+  stderr: false
 };
