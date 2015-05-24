@@ -19,6 +19,10 @@ Documented in [hektor-docs](https://github.com/infinumjs/hektor-docs)
 * connect
 * nodemon
 * serve
+* minify
+* clean
+* exec
+* plato
 
 ## TODO
 
@@ -26,12 +30,7 @@ Documented in [hektor-docs](https://github.com/infinumjs/hektor-docs)
   * csscomb
   * jsformat
 * minify
-  * useminPrepare
-  * usemin
   * imagemin
-  * cssmin
-  * htmlmin
-  * uglify
 * deploy
   * zip
   * ssh
@@ -40,4 +39,3 @@ Documented in [hektor-docs](https://github.com/infinumjs/hektor-docs)
   * copy
   * replace
   * rev
-* exec
