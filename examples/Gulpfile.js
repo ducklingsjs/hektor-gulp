@@ -4,7 +4,7 @@ var gulp = require('gulp');
 // * deps (HEKTOR's gulp deps)
 // * tasks (loaded HEKTOR tasks)
 // * config - paths, task configs
-var H = require('hektor-gulp')(gulp, { app: 'app', dist: 'dist'}).load({
+var H = require('hektor-gulp')(gulp, { app: 'app', dist: 'dist', tmp: '.tmp'}).load({
   styles: {
     browsers: ['chrome 40', 'ios 7']
   },

@@ -7,5 +7,5 @@ module.exports = {
     'last 2 versions',
     'ie 10'
   ],
-  dest: '.tmp/styles'
+  dest: '<%= paths.tmp %>/styles'
 };

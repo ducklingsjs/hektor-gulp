@@ -1,5 +1,5 @@
 module.exports = {
-  root: ['.tmp', 'app'],
+  root: ['<%= paths.tmp %>', '<%= paths.app %>'],
   port: 9100,
   livereload: {
     port: 10100

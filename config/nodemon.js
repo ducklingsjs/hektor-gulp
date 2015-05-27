@@ -2,7 +2,7 @@ module.exports = {
   script: 'index.js',
   ext: 'js',
   ignore: [
-    '.tmp/',
+    '<%= paths.tmp %>/',
     '<%= paths.app %>/',
     '<%= paths.dist %>/',
     'node_modules/'

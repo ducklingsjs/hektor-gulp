@@ -1,12 +1,12 @@
+var _ = require('lodash');
+
 module.exports = function(gulp, paths) {
+  console.log(paths);
   var H = {
     deps: {}, // Don't load modules if you don't have to
     tasks: {},
     config: {
-      paths: paths || {
-        app: 'app',
-        dist: 'dist'
-      }
+      paths: _.extend(paths || {}, { app: 'app', dist: 'dist', tmp: '.tmp' })
     }
   };
 

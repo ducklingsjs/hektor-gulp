@@ -10,7 +10,7 @@ module.exports = {
   moduleSystem: 'browserify',
   transpiler: null,
   templates: 'handlebars',
-  dest: '.tmp/scripts',
+  dest: '<%= paths.tmp %>/scripts',
   debug: false,
   moduleSystemConfig: {
     aliases: {},
