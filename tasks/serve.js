@@ -10,9 +10,15 @@ module.exports = function(gulp, H, options) {
 
   H.load(deps);
 
-  gulp.task(options.taskName, deps, function() {
-    _.each(options.watch, function(watcher) {
-      gulp.watch(watcher.path, watcher.tasks);
+  gulp.task(options.taskName, function() {
+    deps.push(function() {
+      _.each(options.watch, function(watcher) {
+        gulp.watch(watcher.path, function() {
+          H.run.apply(H, watcher.tasks);
+        });
+      });
     });
+
+    H.run.apply(H, deps);
   });
 };

@@ -14,6 +14,7 @@ module.exports = function(gulp, paths) {
 
   H.loadDeps = loader.deps;
   H.load = loader.tasks;
+  H.run = require('run-sequence').use(gulp);
 
   return {
     load: loader.tasks
