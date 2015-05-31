@@ -1,7 +1,6 @@
 var _ = require('lodash');
 
 module.exports = function(gulp, paths) {
-  console.log(paths);
   var H = {
     deps: {}, // Don't load modules if you don't have to
     tasks: {},

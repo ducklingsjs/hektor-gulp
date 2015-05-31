@@ -41,6 +41,7 @@
     "handlebars": "^3.0.3",
     "hbsfy": "^2.2.1",
     "jshint-stylish": "^1.0.2",
+    "loco-sass": "git+https://github.com/DarkoKukovec/loco-sass.git",
     "lodash": "^3.8.0",
     "merge-defaults": "^0.2.1",
     "merge-stream": "^0.1.7",
