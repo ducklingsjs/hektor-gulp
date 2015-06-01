@@ -15,6 +15,11 @@ module.exports = function(gulp, H, options) {
     //   callback should get (null|undefined) as only argument if all OK, or an error object
     if (options.loco && options.loco.dest) {
       var loco = require('loco-sass');
+      var plugins = [];
+      if (options.browsers) {
+        var autoprefixer = require('autoprefixer-core');
+        plugins.push(autoprefixer({ browsers: options.browsers }));
+      }
       loco.render({
         file: options.src,
         loco: {
@@ -22,10 +27,11 @@ module.exports = function(gulp, H, options) {
             styles: options.dest,
             scripts: options.loco.dest
           },
-          format: options.loco.format || '%filepath%_%selector%_%sha1:10%'
+          format: options.loco.format || '%filepath%_%selector%_%sha1:10%',
+          plugins: plugins
         }
       }, function(err, res) {
-        // TODO: autoprefixer!
+        H.deps.connect.reload();
         done(err);
       });
     } else {
