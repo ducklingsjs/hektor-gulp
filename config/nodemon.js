@@ -7,6 +7,5 @@ module.exports = {
     '<%= paths.dist %>/',
     'node_modules/'
   ],
-  tasks: null,
   env: {}
 };
