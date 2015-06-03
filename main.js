@@ -5,7 +5,7 @@ module.exports = function(gulp, paths) {
     deps: {}, // Don't load modules if you don't have to
     tasks: {},
     config: {
-      paths: _.extend(paths || {}, { app: 'app', dist: 'dist', tmp: '.tmp' })
+      paths: _.extend({ app: 'app', dist: 'dist', tmp: '.tmp' }, paths || {})
     }
   };
 
