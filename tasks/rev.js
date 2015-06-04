@@ -11,14 +11,16 @@ module.exports = function(gulp, H, options) {
       .pipe(H.deps.rev.manifest(manifest))
       .pipe(gulp.dest(options.dest))
       .on('end', function(err, res) {
-        if (options.delete) {
-          var fs = require('fs');
-          var man = JSON.parse(fs.readFileSync(manifest));
-          Object.keys(man).forEach(function(original) {
-            fs.unlinkSync(original);
-          });
-        }
-        fs.unlinkSync(manifest);
+        var fs = require('fs');
+        if (fs.existsSync(manifest)) {
+          if (options.delete) {
+            var man = JSON.parse(fs.readFileSync(manifest));
+            Object.keys(man).forEach(function(original) {
+              fs.unlinkSync(original);
+            });
+          }
+          fs.unlinkSync(manifest);
+        } 
         done(err);
       });
   });
