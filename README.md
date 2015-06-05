@@ -24,6 +24,7 @@ Documented in [hektor-docs](https://github.com/infinumjs/hektor-docs)
 * exec
 * plato
 * replace
+* rev
 
 ## Trying it out
 
@@ -42,4 +43,3 @@ Go to examples folder and see how to use hektor-gulp
   * curl
 * build
   * copy
-  * rev
