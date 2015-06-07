@@ -46,11 +46,11 @@ module.exports = function(gulp, H, options) {
       }))
     } else {
       if (options.debug) {
-        H.deps('sourcemaps');
+        H.loadDeps('sourcemaps');
         stream = stream.pipe(H.deps.sourcemaps.init());
       }
       if (options.transpiler === 'babel') {
-        H.deps('babel');
+        H.loadDeps('babel');
         stream = stream.pipe(H.deps.babel(options.transpilerOptions));
       }
       if (options.debug) {
