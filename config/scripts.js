@@ -16,5 +16,9 @@ module.exports = {
     aliases: {},
     nodePath: nodePath
   },
-  transpilerOptions: {}
+  transpilerOptions: {},
+  templateOptions: {
+    src: '<%= paths.app %>/scripts/templates/**/*.hbs',
+    namespace: 'JST'
+  }
 };
