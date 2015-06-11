@@ -57,15 +57,15 @@ module.exports = function(gulp, H, options) {
         stream = stream.pipe(H.deps.sourcemaps.write('.'));
       }
       if (options.templates === 'handlebars') {
-        H.loadDeps(['handlebars', 'wrap', 'declare']);
+        H.loadDeps(['handlebars', 'wrap', 'declare', 'concat']);
         var tmpl = gulp.src(options.templateOptions.src)
           .pipe(H.deps.handlebars(options.transpilerOptions))
-          .pipe(wrap('Handlebars.template(<%= contents %>)'))
-          .pipe(declare({
+          .pipe(H.deps.wrap('Handlebars.template(<%= contents %>)'))
+          .pipe(H.deps.declare({
             namespace: options.templateOptions.namespace,
             noRedeclare: true, // Avoid duplicate declarations 
           }))
-          .pipe(concat('templates.js'))
+          .pipe(H.deps.concat('templates.js'))
           .pipe(gulp.dest(options.dest));
       }
     }
