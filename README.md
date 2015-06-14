@@ -25,6 +25,7 @@ Documented in [hektor-docs](https://github.com/infinumjs/hektor-docs)
 * plato
 * replace
 * rev
+* copy
 
 ## Trying it out
 
@@ -41,5 +42,3 @@ Go to examples folder and see how to use hektor-gulp
   * zip
   * ssh
   * curl
-* build
-  * copy
