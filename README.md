@@ -16,16 +16,17 @@ Documented in [hektor-docs](https://github.com/infinumjs/hektor-docs)
 
 * styles
 * scripts
-* connect
-* nodemon
 * serve
+  * connect
+  * nodemon
 * minify
-* clean
-* exec
-* plato
-* replace
-* rev
-* copy
+* utils
+  * clean
+  * exec
+  * plato
+  * replace
+  * rev
+  * copy
 
 ## Trying it out
 
