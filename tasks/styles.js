@@ -1,3 +1,5 @@
+var _ = require('lodash');
+
 module.exports = function(gulp, H, options) {
 
   // Create a standard gulp task
@@ -5,7 +7,7 @@ module.exports = function(gulp, H, options) {
     // console.log(options);
 
     // Dependencies are lazy loaded - load them only when a task that requires them runs
-    H.loadDeps(['plumber', 'notify', 'sourcemaps', 'sass', 'autoprefixer', 'connect']);
+    H.loadDeps(['plumber', 'notify', 'sourcemaps', 'sass', 'postcss', 'connect']);
 
     // By default, tasks run with maximum concurrency (https://github.com/gulpjs/gulp/blob/master/docs/API.md#async-task-support)
     // That's why a task should _ALWAYS_ do one of the following:
@@ -13,13 +15,16 @@ module.exports = function(gulp, H, options) {
     // * return a promise
     // * call the callback function (the only argument in the task function)
     //   callback should get (null|undefined) as only argument if all OK, or an error object
+
+    var plugins = [];
+    if (options.browsers) {
+      var autoprefixer = require('autoprefixer-core');
+      plugins.push(autoprefixer({ browsers: options.browsers }));
+    }
+
     if (options.loco && options.loco.dest) {
       var loco = require('loco-sass');
-      var plugins = [];
-      if (options.browsers) {
-        var autoprefixer = require('autoprefixer-core');
-        plugins.push(autoprefixer({ browsers: options.browsers }));
-      }
+      plugins = _.compact(plugins.concat(options.postcss));
       loco.render({
         file: options.src,
         loco: {
@@ -43,10 +48,7 @@ module.exports = function(gulp, H, options) {
         .pipe(H.deps.sass({
           includePaths: options.includePaths
         }))
-        .pipe(H.deps.autoprefixer({
-            browsers: options.browsers,
-            cascade: false
-        }))
+        .pipe(postcss(plugins))
         .pipe(H.deps.sourcemaps.write())
         .pipe(gulp.dest(options.dest))
         .pipe(H.deps.connect.reload());
