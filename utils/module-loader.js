@@ -29,6 +29,14 @@ module.exports = function(gulp, H) {
         return;
       }
 
+      // If task options is an array, assume it's a sequence task
+      if (options instanceof Array) {
+        options = {
+          moduleName: 'sequence',
+          tasks: options
+        };
+      }
+
       // Support for task renaming
       options.taskName = module;
       options.moduleName = options.moduleName || module;
