@@ -30,10 +30,16 @@ module.exports = function(gulp, H) {
       }
 
       // If task options is an array, assume it's a sequence task
+      // If task options is a function, assume it's a custom task
       if (options instanceof Array) {
         options = {
           moduleName: 'sequence',
           tasks: options
+        };
+      } else if (typeof options === 'function') {
+        options = {
+          moduleName: 'custom',
+          task: options
         };
       }
 
