@@ -15,7 +15,9 @@ module.exports = function(gulp, H, options) {
     });
 
     gulp.src(options.src, { base: './' })
-      .pipe(H.deps.postcss(processors))
+      .pipe(H.deps.postcss(processors, {
+        from: options.src
+      }))
       .pipe(gulp.dest(options.dest));
   });
 };
