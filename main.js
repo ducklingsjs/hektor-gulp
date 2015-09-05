@@ -1,6 +1,8 @@
 var _ = require('lodash');
 
 module.exports = function(gulp, paths) {
+  'use strict';
+
   var H = {
     deps: {}, // Don't load modules if you don't have to
     tasks: {},
@@ -17,5 +19,5 @@ module.exports = function(gulp, paths) {
 
   return {
     load: loader.tasks
-  }
+  };
 };

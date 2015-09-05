@@ -7,6 +7,9 @@ module.exports = {
     }, {
       path: '<%= paths.app %>/scripts/{,**/}*.{js,hbs}',
       tasks: ['scripts']
+    }, {
+      path: 'node_modules/{,**/}*.{js}',
+      tasks: ['vendor-scripts']
     }
   ]
 };

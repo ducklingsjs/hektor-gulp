@@ -1,18 +1,19 @@
+'use strict';
+
 module.exports = function(gulp, H, options) {
 
   gulp.task(options.taskName, function() {
     H.loadDeps(['plumber', 'notify', 'connect']);
-
-    var stream = gulp.src(options.src)
-      .pipe(H.deps.plumber({
-        errorHandler: H.deps.notify.onError('Scripts: <%= error.message %>')
-      }));
+    var stream;
 
     if (options.moduleSystem === 'browserify') {
       var transforms = [];
       if (options.transpiler === 'babel') {
         var babelify = require('babelify');
-        transforms.push(babelify.configure(options.transpilerOptions));
+        transforms.push({
+          tr: babelify.configure(options.transpilerOptions),
+          options: null
+        });
       }
       if (Object.keys(options.moduleSystemConfig.aliases).length) {
         var aliasify = require('aliasify');
@@ -23,7 +24,10 @@ module.exports = function(gulp, H, options) {
       }
       if (options.bower) {
         var debowerify = require('debowerify');
-        transforms.push(debowerify);
+        transforms.push({
+          tr: debowerify,
+          options: null
+        });
       }
       if (options.templates === 'handlebars') {
         var hbsfy = require('hbsfy');
@@ -35,16 +39,32 @@ module.exports = function(gulp, H, options) {
         });
       }
 
-      H.loadDeps('browserify2');
-      stream = stream.pipe(H.deps.browserify2({
-        fileName: options.filename,
-        transform: transforms,
-        options: {
-          paths: options.moduleSystemConfig.nodePath,
-          debug: !!options.debug
-        }
-      }))
+      var source = require('vinyl-source-stream');
+      var browserify = require('browserify');
+      var b = browserify({
+        paths: options.moduleSystemConfig.nodePath,
+        debug: !!options.debug
+      });
+      b.add(options.src);
+
+      transforms.forEach(function(t) {
+        b.transform(t.tr, t.options);
+      });
+
+      options.moduleSystemConfig.vendors.forEach(function(lib) {
+        b.external(lib);
+      });
+
+      stream = b.bundle()
+        .pipe(source(options.filename))
+        .pipe(H.deps.plumber({
+          errorHandler: H.deps.notify.onError('Scripts: <%= error.message %>')
+        }));
     } else {
+      stream = gulp.src(options.src)
+      .pipe(H.deps.plumber({
+        errorHandler: H.deps.notify.onError('Scripts: <%= error.message %>')
+      }));
       if (options.debug) {
         H.loadDeps('sourcemaps');
         stream = stream.pipe(H.deps.sourcemaps.init());
@@ -58,12 +78,12 @@ module.exports = function(gulp, H, options) {
       }
       if (options.templates === 'handlebars') {
         H.loadDeps(['handlebars', 'wrap', 'declare', 'concat']);
-        var tmpl = gulp.src(options.templateOptions.src)
+        gulp.src(options.templateOptions.src)
           .pipe(H.deps.handlebars(options.transpilerOptions))
           .pipe(H.deps.wrap('Handlebars.template(<%= contents %>)'))
           .pipe(H.deps.declare({
             namespace: options.templateOptions.namespace,
-            noRedeclare: true, // Avoid duplicate declarations 
+            noRedeclare: true, // Avoid duplicate declarations
           }))
           .pipe(H.deps.concat('templates.js'))
           .pipe(gulp.dest(options.dest));

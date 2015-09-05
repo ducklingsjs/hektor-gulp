@@ -14,7 +14,8 @@ module.exports = {
   debug: false,
   moduleSystemConfig: {
     aliases: {},
-    nodePath: nodePath
+    nodePath: nodePath,
+    vendors: []
   },
   transpilerOptions: {},
   templateOptions: {

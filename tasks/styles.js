@@ -1,6 +1,7 @@
 var _ = require('lodash');
 
 module.exports = function(gulp, H, options) {
+  'use strict';
 
   // Create a standard gulp task
   return gulp.task(options.taskName, function(done) {
@@ -35,7 +36,7 @@ module.exports = function(gulp, H, options) {
           format: options.loco.format || '%filepath%_%selector%_%sha1:10%',
           plugins: plugins
         }
-      }, function(err, res) {
+      }, function(err) {
         H.deps.connect.reload();
         done(err);
       });
@@ -48,7 +49,7 @@ module.exports = function(gulp, H, options) {
         .pipe(H.deps.sass({
           includePaths: options.includePaths
         }))
-        .pipe(postcss(plugins))
+        .pipe(H.deps.postcss(plugins))
         .pipe(H.deps.sourcemaps.write())
         .pipe(gulp.dest(options.dest))
         .pipe(H.deps.connect.reload());
