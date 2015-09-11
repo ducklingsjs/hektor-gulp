@@ -63,9 +63,12 @@ module.exports = function(gulp, H, options) {
     } else if (options.moduleSystem === 'dart') {
       H.loadDeps(['dart']);
       return gulp.src(options.src)
-        .pipe(H.deps.dart(options.dest))
+        .pipe(H.deps.dart({
+          dest: options.dest,
+          verbose: options.debug,
+          minify: !options.debug
+        }))
         .pipe(H.deps.connect.reload());
-
     } else {
       stream = gulp.src(options.src)
       .pipe(H.deps.plumber({

@@ -38,7 +38,7 @@
     "gulp-nodemon": "^2.0.3",
     "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.0.0",
-    "gulp-postcss": "^5.1.10",
+    "gulp-postcss": "^6.0.0",
     "gulp-replace": "^0.5.3",
     "gulp-rev": "^4.0.0",
     "gulp-sass": "^2.0.0",
