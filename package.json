@@ -29,6 +29,7 @@
     "gulp-babel": "^5.1.0",
     "gulp-concat": "^2.5.2",
     "gulp-connect": "^2.2.0",
+    "gulp-dart": "^0.2.0",
     "gulp-declare": "^0.3.0",
     "gulp-handlebars": "^4.0.0",
     "gulp-if": "^1.2.5",

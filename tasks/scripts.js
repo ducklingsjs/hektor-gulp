@@ -60,6 +60,12 @@ module.exports = function(gulp, H, options) {
         .pipe(H.deps.plumber({
           errorHandler: H.deps.notify.onError('Scripts: <%= error.message %>')
         }));
+    } else if (options.moduleSystem === 'dart') {
+      H.loadDeps(['dart']);
+      return gulp.src(options.src)
+        .pipe(H.deps.dart(options.dest))
+        .pipe(H.deps.connect.reload());
+
     } else {
       stream = gulp.src(options.src)
       .pipe(H.deps.plumber({
@@ -94,3 +100,4 @@ module.exports = function(gulp, H, options) {
       .pipe(H.deps.connect.reload());
   });
 };
+js
