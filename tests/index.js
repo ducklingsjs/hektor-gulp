@@ -1,2 +1,2 @@
 require('./clean.js');
-require('./codecheck.js');
+// require('./codecheck.js');
