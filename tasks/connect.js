@@ -1,4 +1,4 @@
-var _ = require('lodash');
+'use strict';
 
 module.exports = function(gulp, H, options) {
   return function(callback) {

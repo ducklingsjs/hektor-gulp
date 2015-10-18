@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(gulp, H, options) {
+module.exports = function(gulp, H) {
 
   return function() {
     H.loadDeps(['connect']);

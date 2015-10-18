@@ -10,7 +10,7 @@ module.exports = function(gulp, H, options) {
       .pipe(gulp.dest(options.dest))
       .pipe(H.deps.rev.manifest(manifest))
       .pipe(gulp.dest(options.dest))
-      .on('end', function(err, res) {
+      .on('end', function(err) {
         var fs = require('fs');
         if (fs.existsSync(manifest)) {
           if (options.delete) {

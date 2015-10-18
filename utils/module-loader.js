@@ -55,7 +55,9 @@ module.exports = function(gulp, H) {
   }
 
   function loadTask(taskName) {
-    if (H.tasks[taskName]) return; // Already set
+    if (H.tasks[taskName]) {
+      return; // Already set
+    }
 
     // styles task is also documented
     var config = H.config[taskName];
@@ -72,14 +74,16 @@ module.exports = function(gulp, H) {
     } else if (H.taskOpts[taskName] === undefined) {
       return; // Already defined task
     }
-    H.tasks[taskName] = gulp.task(options.taskName, H.taskOpts[taskName].deps || [], H.taskOpts[taskName].fn);
+    H.tasks[taskName] = gulp.task(taskName, H.taskOpts[taskName].deps || [], H.taskOpts[taskName].fn);
   }
 
   return {
     deps: function(deps) {
       deps = [].concat(deps);
       deps.forEach(function(name) {
-        if (H.deps[name]) return; // Already loaded
+        if (H.deps[name]) {
+          return; // Already loaded
+        }
 
         H.deps[name] = require('gulp-' + name);
       });
@@ -114,7 +118,7 @@ module.exports = function(gulp, H) {
       }
       return H;
     },
-    
+
     initTask: initTask
   };
 };

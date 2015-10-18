@@ -92,7 +92,7 @@ module.exports = function(gulp, H, options) {
           .pipe(H.deps.wrap('Handlebars.template(<%= contents %>)'))
           .pipe(H.deps.declare({
             namespace: options.templateOptions.namespace,
-            noRedeclare: true, // Avoid duplicate declarations
+            noRedeclare: true // Avoid duplicate declarations
           }))
           .pipe(H.deps.concat('templates.js'))
           .pipe(gulp.dest(options.dest));
