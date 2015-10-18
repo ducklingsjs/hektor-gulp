@@ -1,7 +1,7 @@
-var _ = require('lodash');
+'use strict';
 
 module.exports = function(gulp, H, options) {
-  gulp.task(options.taskName, function(callback) {
+  return function(callback) {
     try {
       H.loadDeps('connect');
       H.deps.connect.server({
@@ -13,5 +13,5 @@ module.exports = function(gulp, H, options) {
     } catch(e) {
       callback(e);
     }
-  });
+  };
 };

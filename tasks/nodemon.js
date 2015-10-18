@@ -1,5 +1,5 @@
 module.exports = function(gulp, H, options) {
-  gulp.task(options.taskName, function(callback) {
+  return function(callback) {
     try {
       H.loadDeps('nodemon');
       H.deps.nodemon({
@@ -13,5 +13,5 @@ module.exports = function(gulp, H, options) {
     } catch(e) {
       callback(e);
     }
-  });
+  };
 };

@@ -1,7 +1,7 @@
-var exec = require('child_process').exec
+var exec = require('child_process').exec;
 
 module.exports = function(gulp, H, options) {
-  gulp.task(options.taskName, function(done) {
+  return function(done) {
     var cmd = options.command;
     if (typeof cmd === 'function') {
       cmd = cmd();
@@ -15,5 +15,5 @@ module.exports = function(gulp, H, options) {
         console.error(stderr);
       }
     });
-  });
+  };
 };

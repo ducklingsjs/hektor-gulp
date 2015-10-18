@@ -1,5 +1,5 @@
 var _ = require('lodash');
-_.mergeDefaults = require('merge-defaults')
+_.mergeDefaults = require('merge-defaults');
 
 module.exports = function(defaults, options, templateOpts) {
   var opts = _.mergeDefaults({}, options || {}, defaults);

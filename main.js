@@ -6,6 +6,7 @@ module.exports = function(gulp, paths) {
   var H = {
     deps: {}, // Don't load modules if you don't have to
     tasks: {},
+    taskOpts: {},
     config: {
       paths: _.extend({ app: 'app', dist: 'dist', tmp: '.tmp' }, paths || {})
     }
@@ -13,6 +14,7 @@ module.exports = function(gulp, paths) {
 
   var loader = require('./utils/module-loader')(gulp, H);
 
+  H.initTask = loader.initTask;
   H.loadDeps = loader.deps;
   H.load = loader.tasks;
   H.run = require('run-sequence').use(gulp);

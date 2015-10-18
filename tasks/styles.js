@@ -4,7 +4,7 @@ module.exports = function(gulp, H, options) {
   'use strict';
 
   // Create a standard gulp task
-  return gulp.task(options.taskName, function(done) {
+  return function(done) {
     // console.log(options);
 
     // Dependencies are lazy loaded - load them only when a task that requires them runs
@@ -54,5 +54,5 @@ module.exports = function(gulp, H, options) {
         .pipe(gulp.dest(options.dest))
         .pipe(H.deps.connect.reload());
     }
-  });
+  };
 };
