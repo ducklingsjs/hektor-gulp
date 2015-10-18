@@ -2,7 +2,7 @@
 
 module.exports = function(gulp, H, options) {
 
-  gulp.task(options.taskName, function() {
+  return function() {
     H.loadDeps(['connect']);
 
     var scriptOptions = H.config.scripts;
@@ -24,5 +24,5 @@ module.exports = function(gulp, H, options) {
     return stream
       .pipe(gulp.dest(scriptOptions.dest))
       .pipe(H.deps.connect.reload());
-  });
+  };
 };

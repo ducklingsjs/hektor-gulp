@@ -1,13 +1,13 @@
 var merge = require('merge-stream');
 
 module.exports = function(gulp, H, options) {
-  return gulp.task(options.taskName, function() {
+  return function() {
     H.loadDeps(['jshint', 'scss-lint']);
 
     var jsstream = gulp.src(options.src.js)
       .pipe(H.deps.jshint())
       .pipe(H.deps.jshint.reporter('jshint-stylish'));
-      
+
     var scssstream = gulp.src(options.src.scss)
       .pipe(H.deps['scss-lint']({
         config: options.config.scss,
@@ -20,5 +20,5 @@ module.exports = function(gulp, H, options) {
     }
 
     return merge(jsstream, scssstream);
-  });
+  };
 };

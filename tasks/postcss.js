@@ -1,7 +1,7 @@
 module.exports = function(gulp, H, options) {
   'use strict';
 
-  return gulp.task(options.taskName, function() {
+  return function() {
     H.loadDeps(['postcss']);
 
     options.dest = options.dest || './';
@@ -19,5 +19,5 @@ module.exports = function(gulp, H, options) {
         from: options.src
       }))
       .pipe(gulp.dest(options.dest));
-  });
+  };
 };

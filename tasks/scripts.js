@@ -2,7 +2,7 @@
 
 module.exports = function(gulp, H, options) {
 
-  gulp.task(options.taskName, function() {
+  return function() {
     H.loadDeps(['plumber', 'notify', 'connect']);
     var stream;
 
@@ -101,5 +101,5 @@ module.exports = function(gulp, H, options) {
 
     return stream.pipe(gulp.dest(options.dest))
       .pipe(H.deps.connect.reload());
-  });
+  };
 };

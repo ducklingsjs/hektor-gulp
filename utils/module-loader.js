@@ -59,7 +59,20 @@ module.exports = function(gulp, H) {
 
     // styles task is also documented
     var config = H.config[taskName];
-    H.tasks[taskName] = require('../tasks/' + config.moduleName)(gulp, H, config);
+    H.initTask(taskName, require('../tasks/' + config.moduleName)(gulp, H, config));
+  }
+
+  function initTask(taskName, task) {
+    H.taskOpts[taskName] = task;
+    if (typeof H.taskOpts[taskName] === 'function') {
+      H.taskOpts[taskName] = {
+        fn: H.taskOpts[taskName],
+        deps: []
+      };
+    } else if (H.taskOpts[taskName] === undefined) {
+      return; // Already defined task
+    }
+    H.tasks[taskName] = gulp.task(options.taskName, H.taskOpts[taskName].deps || [], H.taskOpts[taskName].fn);
   }
 
   return {
@@ -100,6 +113,8 @@ module.exports = function(gulp, H) {
         _.each(_.keys(modules), loadTask);
       }
       return H;
-    }
+    },
+    
+    initTask: initTask
   };
 };

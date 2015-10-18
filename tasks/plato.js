@@ -35,5 +35,5 @@ module.exports = function(gulp, H, options) {
     }
   };
 
-  execTask(gulp, H, execOptions);
+  return execTask(gulp, H, execOptions);
 };

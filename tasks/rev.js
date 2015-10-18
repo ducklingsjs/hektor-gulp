@@ -1,5 +1,5 @@
 module.exports = function(gulp, H, options) {
-  return gulp.task(options.taskName, function(done) {
+  return  function(done) {
     H.loadDeps(['rev']);
 
     options.dest = options.dest || './';
@@ -20,8 +20,8 @@ module.exports = function(gulp, H, options) {
             });
           }
           fs.unlinkSync(manifest);
-        } 
+        }
         done(err);
       });
-  });
+  };
 };
