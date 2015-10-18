@@ -53,7 +53,7 @@
     "hbsfy": "^2.2.1",
     "jshint-stylish": "^2.0.1",
     "loco-sass": "git+https://github.com/DarkoKukovec/loco-sass.git",
-    "lodash": "^3.8.0",
+    "lodash": "^3.10.1",
     "merge-defaults": "^0.2.1",
     "merge-stream": "^1.0.0",
     "rev-del": "^1.0.4",
