@@ -2,6 +2,9 @@
 
 Helpful Esoteric Kind Tool Or Resource
 
+[![Build Status](https://travis-ci.org/infinumjs/hektor-gulp.svg?branch=master)](https://travis-ci.org/infinumjs/hektor-gulp)
+[![Dependency Status](https://david-dm.org/infinumjs/hektor-gulp.svg)](https://david-dm.org/infinumjs/hektor-gulp)
+
 Project scaffolding &amp; dev dependency manager tool
 
 To install, run: ``npm install git@github.com:infinumjs/hektor-gulp.git --save-dev``
