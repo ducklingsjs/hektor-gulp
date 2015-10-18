@@ -2,6 +2,8 @@
 
 Helpful Esoteric Kind Tool Or Resource
 
+[![Code Climate](https://codeclimate.com/github/infinumjs/hektor-gulp/badges/gpa.svg)](https://codeclimate.com/github/infinumjs/hektor-gulp)
+[![Test Coverage](https://codeclimate.com/github/infinumjs/hektor-gulp/badges/coverage.svg)](https://codeclimate.com/github/infinumjs/hektor-gulp/coverage)
 [![Build Status](https://travis-ci.org/infinumjs/hektor-gulp.svg?branch=master)](https://travis-ci.org/infinumjs/hektor-gulp)
 [![Dependency Status](https://david-dm.org/infinumjs/hektor-gulp.svg)](https://david-dm.org/infinumjs/hektor-gulp)
 
